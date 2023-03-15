@@ -1,4 +1,4 @@
-
+% backdoors
 
 # Concepts
 
@@ -18,8 +18,6 @@ There are three distinct operations involved in Owlyshield runtime:
 ## The Kernel Module
 
 ### File system events 
-
-%Structure common to Windows and Linux
 
 Owlyshield uses two different technologies to collect metadata about input/output operations on both Linux and Windows. On Linux, Owlyshield utilizes eBPF to hook into the Virtual File System (VFS) functions and intercept and modify file system operations. By doing so, it can collect metadata such as the name and path of the accessed files, the user and process ID that initiated the operation, and the access mode and flags. On Windows, Owlyshield employs a Minifilter to intercept input/output request packets (IRPs) and collect similar metadata about file operations on the file system. By using both eBPF on Linux and a Minifilter on Windows, Owlyshield can provide a unified and consistent view of file operations across multiple platforms, which can be useful for monitoring and analyzing system behavior or detecting security threats.
 
@@ -56,9 +54,52 @@ By aggregating the data by Gid, Owlyshield can gain insights into the behavior o
 
 Overall, aggregating data by Gid is a powerful technique that can help Owlyshield monitor and protect the entire family of processes associated with a particular subtree, and quickly detect and respond to security threats.
 
+The following table provides a breakdown of the Timestep structure attributes and their corresponding explanations:
 
-#### Clusterize the activity
+| Attribute Name               | Explanation                                                            |
+|------------------------------|------------------------------------------------------------------------|
+| ops_read                     | Count of Read operations                                                |
+| ops_setinfo                  | Count of SetInfo operations                                             |
+| ops_written                  | Count of Write operations                                               |
+| ops_open                     | Count of Handle Creation operations                                     |
+| bytes_read                   | Total bytes read (by gid)                                               |
+| bytes_written                | Total bytes written (by gid)                                            |
+| entropy_read                 | Total entropy read                                                      |
+| entropy_written              | Total entropy write                                                     |
+| files_opened                 | File descriptors created                                                |
+| files_deleted                | File descriptors deleted                                                |
+| files_read                   | File descriptors read                                                   |
+| files_renamed                | File descriptors renamed                                                |
+| files_written                | File descriptors written                                                |
+| extensions_read              | Unique extensions read count                                            |
+| extensions_written           | Unique extensions write count                                           |
+| extensions_written_doc       | Unique extensions written count (documents)                             |
+| extensions_written_archives  | Unique extensions written count (archives)                              |
+| extensions_written_db        | Unique extensions written count (DB)                                    |
+| extensions_written_code      | Unique extensions written count (code)                                  |
+| extensions_written_exe       | Unique extensions written count (executables)                           |
+| dirs_with_files_created     | Directories having files created                                        |
+| dirs_with_files_updated     | Directories having files updated                                        |
+| pids                         | Number of pids in this gid process family                               |
+| exe_exists                   | Process exe file still exists (father)?                                  |
+| cluster_count                | Number of directories (with files updated) clusters created             |
+| clusters_max_size            | Deepest cluster size                                                     |
+
+
+The table presented below is an exemple of the result of the aggregation and computation of metadata collected by the kernel probe for every 50 I/O (input/output) operations. The probe collects data on various aspects of the I/O operations, such as file descriptors, unique extensions, directories with files, process ID, and the deepest cluster size. These metrics are aggregated and computed every 50 I/O operations, and the resulting data is displayed in the table with the appname and gid columns indicating the application name and the group ID for which the data was collected. Note that not all collected features are displayed in the table for the sake of conciseness.
+
+| appname    | gid   | ops_read | ops_setinfo | ops_written | ops_open | bytes_read | bytes_written |
+|------------|-------|----------|-------------|-------------|----------|------------|---------------|
+| adonix.exe | 2-56  | 5020     | 81          | 2231        | 10948    | 418723780  | 8075244       |
+| adonix.exe | 2-56  | 5020     | 81          | 2251        | 10948    | 418723780  | 8080363       |
+| adonix.exe | 2-56  | 5023     | 81          | 2268        | 10948    | 419165280  | 8895424       |
+| adonix.exe | 2-56  | 5027     | 81          | 2284        | 10948    | 419168580  | 8897510       |
+
+
+#### Directories clusters
+
 Owlyshield has a unique feature that allows it to cluster directories based on the file system activity of the process subtree associated with a particular Gid. This is done using a technique known as hierarchical clustering, which groups data points into a hierarchical structure based on their similarity. With hierarchical clustering, Owlyshield can group together directories that are frequently accessed or modified by the same family of processes, creating a map of how the family of processes is using the file system.
+
 
 ### Machine Learning
 
