@@ -16,13 +16,14 @@ export default defineConfig({
 				text: 'Owlyshield',
 				items: [
 					{ text: 'Introduction', link: '/introduction'},
-					{ text: 'Concepts', link: '/concepts'},
+					{ text: 'Technical Deep Dive', link: '/concepts'},
 					{ text: 'Get Started', 
 						items: [
 							{ text: 'Install Owlyshield (Linux)', link: '/getting-started/install-linux' },
 							{ text: 'Install Owlyshield (Windows)', link: '/getting-started/install-windows' }
 						]
 					},
+					{ text: 'Configuration', link: '/config'},
 					{ text: 'Build from Source',
 						collapsed: true,
 						items: [

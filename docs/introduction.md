@@ -1,37 +1,26 @@
----
-outline: deep
----
-
 # Introduction
 
+Owlyshield is a versatile and open-source EDR (Endpoint Detection and Response) solution designed for Linux, Windows, and IoT devices. Developed by SitinCloud, a French company, Owlyshield specializes in detecting intrusions through vulnerability exploitation, with a primary focus on identifying Command and Control, exfiltration, and impact tactics. It achieves this by learning the normal behavior of applications and employing novelty detection to identify weak signals indicative of an attack.
 
-[Owlyshield](https://github.com/SitinCloud/Owlyshield) is an open-source EDR (Endpoint Detection and Response) solution for Linux and Windows servers. It analyzes how processes use files to detect intrusions through vulnerability exploitation, with a particular focus on detecting Command and Control, exfiltration and impact tactics. The project is developed by [SitinCloud](https://www.sitincloud.com), a French company.
+As a highly extensible framework, Owlyshield enables users to incorporate additional algorithms for malware detection, UEBA (User and Entity Behavior Analytics), and novelty detection. It also facilitates the recording and replaying of file activities for training machine learning models, such as autoencoders.
 
-The main idea behind Owlyshield is to learn the normal behavior of applications (essentially trees of processes) and use this knowledge to identify weak signals of an attack through the use of novelty detection.
+# Key Features
 
-Owlyshield's extensibility is a key feature that sets it apart from other EDR solutions.  As a framework you can add new algorithms for malware detection, UEBA (User and Entity Behavior Analytics), and novelty detection. You can also use Owlyshield to record and replay file activities for training machine learning models, as we do with our autoencoder feature.
+While Owlyshield is designed for customization and extension, it boasts several built-in, high-performance features:
 
-Owlyshield provides powerful and efficient endpoint detection and response capabilities for Linux, Windows, and IoT devices. Its unique focus on file activities makes it highly effective at detecting fileless malware and C&C beacons that may go unnoticed by other EDR solutions.
+Advanced novelty detection using autoencoders (commercial version)
+Real-time ransomware protection on Windows with XGBoost
+Novelty detection featuring embedded training for both Linux (+IoT) and Windows
+Auto-configuration of SELinux for automatic protection of exposed applications (currently in development)
 
+# Real-Life Success Stories
 
-## Main Features
+Owlyshield's robust threat detection and response capabilities have proven invaluable in numerous real-world scenarios, including:
 
-Although Owlyshield is a framework designed to be customized and extended, it also comes with pre-built, powerful features that are immediately usable :
+**ESXi Server Breach**: An attacker exploited a critical CVE in an ESXi server to deploy a payload. Owlyshield detected weak signals of the attack by analyzing file activities and identifying unusual behavior within the ESXi process family, revealing the presence of a malicious process.
 
+**JHipster Web Application Vulnerability**: A JHipster-built web application had a concealed URL that allowed for JVM memory dumping, unbeknownst to the infrastructure team. Owlyshield detected the exploitation of this vulnerability by monitoring the file system for abnormal activity related to the creation of the dump file.
 
-- Advanced novelty detection with autoencoders (commercial version),
-- Ransomware protection in real-time on Windows using XGBoost,
-- Novelty detection with embedded training on both Linux (+IoT) and Windows,
-- Auto-configuration of SELinux to automatically protect exposed applications (currently being developed).
+**ERP System Sabotage**: A large, expensive ERP system was accessed by consultants from various countries. One consultant with admin rights began to discreetly corrupt specific files in the ERP system, making it appear as a series of bugs or glitches rather than an intentional attack. Owlyshield detected the subtle file manipulations, thwarting the attacker's plans.
 
-
-## Real-Life Examples
-
-Owlyshield provides a powerful solution for detecting and responding to threats in real-time. Here are three real-life examples of how Owlyshield protected our customers:
-
-- An attacker exploited a critical CVE in an ESXi server to deploy a payload. Owlyshield detected weak signals of the attack on the ESXi server by analyzing the file activities and identifying unusual behavior in the ESXi process family, indicating the presence of a malicious process.
-- A web application built with JHipster had a hidden URL that could be used to dump the JVM memory, but the infrastructure team was not aware of this vulnerability. Owlyshield was able to detect it was exploited by analyzing the file system for unusual activity related to creating the dump file,
-- A large and expensive ERP system was accessed by teams of consultants from different countries. One of them, with admin rights, began to slowly corrupt specific files in the ERP system. The attacker used this tactic to make the corruption look like a series of bugs or glitches rather than a deliberate attack. 
-
-
-
+Owlyshield's unique approach to monitoring file activities, along with its extensibility and advanced features, sets it apart from other EDR solutions, making it a powerful asset in the fight against cybersecurity threats.
