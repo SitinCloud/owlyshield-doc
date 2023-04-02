@@ -16,14 +16,21 @@ export default defineConfig({
 				text: 'Owlyshield',
 				items: [
 					{ text: 'Introduction', link: '/introduction'},
-					{ text: 'Technical Deep Dive', link: '/concepts'},
+					{ text: 'Technical Deep Dive',
+						items: [
+							{ text: 'Basic Concepts', link: '/concepts/basics'},
+							{ text: 'Clusterizing Directories', link: '/concepts/clusters'},
+							{ text: 'Ransomware Detection', link: '/concepts/ransomware-detection'},
+							{ text: 'Novelty Detection', link: '/concepts/novelty-embedded'}
+						]
+					},
 					{ text: 'Get Started', 
 						items: [
 							{ text: 'Install Owlyshield (Linux)', link: '/getting-started/install-linux' },
-							{ text: 'Install Owlyshield (Windows)', link: '/getting-started/install-windows' }
+							{ text: 'Install Owlyshield (Windows)', link: '/getting-started/install-windows' },
+							{ text: 'Configuration', link: '/getting-started/config'}
 						]
 					},
-					{ text: 'Configuration', link: '/config'},
 					{ text: 'Build from Source',
 						collapsed: true,
 						items: [
