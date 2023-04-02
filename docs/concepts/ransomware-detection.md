@@ -2,8 +2,8 @@
 
 Owlyshield is an EDR software designed to detect ransomware by monitoring their activity on the file disk. The software operates in two distinct modes:
 
-Training mode: In this mode, Owlyshield writes a CSV file containing various features extracted from the monitored processes. This data is used to train the XGBoost machine learning model to identify ransomware effectively.
-Real-time prediction mode: In this mode, Owlyshield uses the trained XGBoost model to predict whether the observed process activities are indicative of ransomware in real-time.
+- Training mode: In this mode, Owlyshield writes a CSV file containing various features extracted from the monitored processes. This data is used to train the XGBoost machine learning model to identify ransomware effectively.
+- Real-time prediction mode: In this mode, Owlyshield uses the trained XGBoost model to predict whether the observed process activities are indicative of ransomware in real-time.
 
 ## CSV Data Collection for Training
 
