@@ -16,6 +16,10 @@ The user-space module preprocesses and analyzes the data collected by the kernel
 
 Owlyshield uses group identifiers (Gids) to aggregate data by process subtrees, allowing for more accurate behavioral analysis and threat detection. By monitoring the activity of related processes, the system can quickly identify suspicious behavior and generate alerts for the system administrator.
 
+::: warning
+On Windows, the minifilter registrates a new GID when a new process is created (see [`PsSetCreateProcessNotifyRoutine`](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/ntddk/nf-ntddk-pssetcreateprocessnotifyroutine)).
+:::
+
 ### Directory Clustering
 
 With hierarchical clustering, Owlyshield groups directories based on the file system activity of the process subtree associated with a particular Gid. This innovative feature enables a comprehensive understanding of how related processes utilize the file system, further enhancing threat detection capabilities.

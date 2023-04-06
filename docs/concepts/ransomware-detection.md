@@ -62,6 +62,8 @@ XGBoost (Extreme Gradient Boosting) is a powerful, open-source machine learning 
 
 For Owlyshield, the XGBoost model is translated into plain Rust code, further enhancing the performance and efficiency of the model. This optimized implementation enables real-time ransomware detection while maintaining low resource usage.
 
+![An example of a decision tree for ransomware classification](./img/tree_5.png)
+
 ## High-quality Training Data
 
 The XGBoost model used by Owlyshield has been trained on an extensive dataset comprising recent ransomware samples and standard programs (non-malware). This diverse and up-to-date training data ensures that the model can effectively distinguish between ransomware activities and legitimate processes, minimizing the risk of false positives and false negatives.
