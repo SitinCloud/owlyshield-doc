@@ -36,7 +36,7 @@ Install LLVM 15 and Linux kernel headers with the following commands:
 
 ```bash
 # dnf install -y \
-    clang-15.0.0 \
+	clang-15.0.0 \
 	llvm-15.0.0 \
 	llvm-libs-15.0.0 \
 	llvm-devel-15.0.0 \
@@ -45,8 +45,9 @@ Install LLVM 15 and Linux kernel headers with the following commands:
 	kernel-devel \
 	elfutils-libelf-devel \
 	make \
-    pkg-config \
-    zstd
+	libpolly-15-dev \
+    	pkg-config \
+    	zstd
 # llvm-config --version | grep 15
 ```
 ### Arch Linux
@@ -78,16 +79,6 @@ $ cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/llvm-15-release -DCMAKE_BUILD_TYPE=Relea
 $ cmake --build . --target install
 ```
 
-## Custom Installation Path
-To specify the custom installation path for installing cargo-bpf or building RedBPF, use the following command:
-
-```bash
-$ LLVM_SYS_150_PREFIX=$HOME/llvm-15-release/ cargo install cargo-bpf
-$ LLVM_SYS_150_PREFIX=$HOME/llvm-15-release/ cargo build
-```
-
-Ensure that the correct -DCMAKE_BUILD_TYPE is specified. Typically, the Debug type is not recommended unless debugging LLVM itself.
-
 ## Building RedBPF
 Clone the llvm15 branch of https://github.com/SitinCloud/redbpf/ and use the following commands:
 
@@ -96,8 +87,9 @@ $ git clone https://github.com/foniod/redbpf.git
 $ cd redbpf
 $ git submodule sync
 $ git submodule update --init
-$ cargo build
-$ cargo build --examples
+$ git fetch
+$ git checkout llvm15
+$ LLVM_SYS_150_PREFIX=$HOME/llvm-15-release/ cargo install --path cargo-bpf
 ```
 
 ## Compiling Owlyshield
